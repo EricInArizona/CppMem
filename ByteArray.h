@@ -28,11 +28,6 @@ class ByteArray
 
   char* cArray;
 
-  // I don't want to use any single array that
-  // is bigger than 0x7FFFFFFF.  Like 2
-  // gigabytes. If I need it to be bigger than
-  // that then I'll use multiple arrays.
-
   Int32 arraySize = 1;
 
   public:
@@ -73,6 +68,7 @@ class ByteArray
 
     arraySize = howBig;
     delete[] cArray;
+
     // Casting.h is meant to throw exceptions
     // when it has something like a negative
     // number being cast to an unsigned number.
@@ -97,6 +93,7 @@ class ByteArray
 
     // memcpy() in string.h.
     // std::memcpy()
+
     // Use inline assembly.
 
     for( Int32 count = 0; count < howMany;
@@ -167,26 +164,18 @@ class ByteArray
     if( (toSet & 0x80) != 0 )
       changeIt |= 0x80;
 
+    // Avoid the warning about changing sign.
+    // char change2 = toSet & 0x7F;
+    // change2 |= toSet & 0x80;
+
+    char change2 = 0;
+    change2 |= toSet & 0xFF;
+
+
+    if( changeIt != change2 )
+      throw "ByteArray.setU8() changeIt.";
+
     cArray[where] = changeIt;
     }
-
-/*
-  inline bool isEqual( ByteArray& inArray )
-    {
-    if( arraySize != inArray.arraySize )
-      return false;
-
-    for( Int32 count = 0; count < arraySize;
-                                  count++ )
-      {
-      if( cArray[count] != inArray.cArray[count] )
-        return false;
-
-      }
-
-    return true;
-    }
-*/
-
 
   };

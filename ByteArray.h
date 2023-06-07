@@ -84,17 +84,21 @@ class ByteArray
   inline void copy( const ByteArray& copyFrom,
                     const Int32 howMany )
     {
-    const Int32 fromSize = copyFrom.getSize();
-    if( getSize() < fromSize )
-      setSize( fromSize );
+    // if( getSize() == howMany )
+    //    That's normal.
 
+    if( getSize() < howMany )
+      setSize( howMany + 1024 );
+
+    const Int32 fromSize = copyFrom.getSize();
     if( fromSize < howMany )
       throw "ByteArray.copy() howMany too big.";
 
     // memcpy() in string.h.
     // std::memcpy()
 
-    // Use inline assembly.
+    // Use inline assembly to copy a block
+    // of memory.
 
     for( Int32 count = 0; count < howMany;
                                       count++ )

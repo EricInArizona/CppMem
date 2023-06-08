@@ -164,11 +164,12 @@ class ByteArray
     RangeC::test2( where, 0, arraySize - 1,
              "ByteArray.setU8() arraySize." );
 
-    char changeIt = toSet & 0x7F;
-    if( (toSet & 0x80) != 0 )
-      changeIt |= 0x80;
+    // char changeIt = toSet & 0x7F;
+    // if( (toSet & 0x80) != 0 )
+      // changeIt |= 0x80;
 
     // Avoid the warning about changing sign.
+
     // char change2 = toSet & 0x7F;
     // change2 |= toSet & 0x80;
 
@@ -176,10 +177,10 @@ class ByteArray
     change2 |= toSet & 0xFF;
 
 
-    if( changeIt != change2 )
-      throw "ByteArray.setU8() changeIt.";
+    // if( changeIt != change2 )
+      // throw "ByteArray.setU8() changeIt.";
 
-    cArray[where] = changeIt;
+    cArray[where] = change2;
     }
 
   };

@@ -81,18 +81,22 @@ class ByteArray
     return arraySize;
     }
 
-  inline void copy( const ByteArray& copyFrom,
-                    const Int32 howMany )
-    {
-    // if( getSize() == howMany )
-    //    That's normal.
 
-    if( getSize() < howMany )
-      setSize( howMany + 1024 );
+  inline void copy( const ByteArray& copyFrom,
+                    const Int32 howMany,
+                    const Int32 setToSize )
+    {
+    if( setToSize < howMany )
+      throw 
+        "ByteArray.copy() setToSize < howMany";
+
+    const Int32 thisSize = getSize();
+    if( thisSize != setToSize )
+      setSize( setToSize );
 
     const Int32 fromSize = copyFrom.getSize();
     if( fromSize < howMany )
-      throw "ByteArray.copy() howMany too big.";
+      throw "ByteArray.copy() fromSize < howMany";
 
     // memcpy() in string.h.
     // std::memcpy()

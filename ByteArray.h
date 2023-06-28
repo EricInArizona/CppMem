@@ -25,6 +25,9 @@
 // -Wno-unsafe-buffer-usage
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+
 class ByteArray
   {
   private:
@@ -192,3 +195,5 @@ class ByteArray
     }
 
   };
+
+#pragma clang diagnostic pop

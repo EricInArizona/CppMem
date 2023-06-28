@@ -19,6 +19,10 @@
 #include "../CppBase/RangeC.h"
 
 
+// In the future clang might want you to use
+// std::array and things like that.
+
+// -Wno-unsafe-buffer-usage
 
 
 class ByteArray
@@ -87,7 +91,7 @@ class ByteArray
                     const Int32 setToSize )
     {
     if( setToSize < howMany )
-      throw 
+      throw
         "ByteArray.copy() setToSize < howMany";
 
     const Int32 thisSize = getSize();
